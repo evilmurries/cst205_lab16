@@ -21,9 +21,17 @@ import urllib2
 # This function assembles a new HTML document with the supplied information
 def makePage(info):
     file = 'C:\\Users\\Public\\newPage.html'
-    header = '<!doctype html><html lang="en">'
+    header = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transition//EN" \
+    "http://www.w3.org/TR/html4/loose.dtd">'
+    title = '<html>\n<head><title> Title </title>\n</head>'
+    bodyOpen = '<body>\n<h1>'
+    bodyClose = '</body>\n</html>'
     file = open(file, 'w')
-    file.write(info)
+    file.write(header)
+    file.write(title)
+    file.write(bodyOpen)
+    file.write('Testing!!!')
+    file.write(bodyClose)
     file.close()
 
 # Main function for the program
