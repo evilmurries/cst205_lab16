@@ -18,14 +18,14 @@
 
 import urllib.request
 import os
+import re
 
 # This function assembles a new HTML document with the supplied information
-def makePage(info):
-    path = os.path.abspath(os.getcwd())
-    print(path)
-    file = path + '/newPage.html'
-    header = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transition//EN" \
-    "http://www.w3.org/TR/html4/loose.dtd">'
+def makePage(events):
+    filename = 'newPage.html'
+    file = os.path.join(os.getcwd(), filename)
+    header = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transition//EN"\
+ "http://www.w3.org/TR/html4/loose.dtd">'
     title = '<html>\n<head><title> Title </title>\n</head>'
     bodyOpen = '<body>\n<h1>'
     bodyClose = '</body>\n</html>'
@@ -34,7 +34,10 @@ def makePage(info):
             htmlPage.write(header)
             htmlPage.write(title)
             htmlPage.write(bodyOpen)
-            htmlPage.write('Testing!!!')
+            htmlPage.write('Upcoming Python Conventions<br>')
+            for event in events:
+                htmlPage.write(event + '<br>')
+
             htmlPage.write(bodyClose)
             htmlPage.close()
     except IOError:
@@ -46,6 +49,7 @@ def main():
     # declare variables
     URL = 'https://www.python.org'
     HEADERS = {'User-Agent': "Mozilla/4.0"}
+    regex = re.compile(r'<a href="/events/python-events/7.*?">(.*?)</a></li>')
 
     # open webpage
     try:
@@ -59,9 +63,10 @@ def main():
         raise SystemExit
 
     # collect information
+    events = regex.findall(web_page)
 
     # make new page
-    makePage(web_page)
+    makePage(events)
 
 if __name__ == '__main__':
     main()
