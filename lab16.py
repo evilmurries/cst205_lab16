@@ -17,28 +17,34 @@
 
 
 import urllib2
+import os
 
 # This function assembles a new HTML document with the supplied information
 def makePage(info):
-    file = 'C:\\Users\\Public\\newPage.html'
+    path = os.path.pathabs(os.path.getcwd())
+    file = path + 'newPage.html'
+    print file
     header = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transition//EN" \
     "http://www.w3.org/TR/html4/loose.dtd">'
     title = '<html>\n<head><title> Title </title>\n</head>'
     bodyOpen = '<body>\n<h1>'
     bodyClose = '</body>\n</html>'
-    file = open(file, 'w')
-    file.write(header)
-    file.write(title)
-    file.write(bodyOpen)
-    file.write('Testing!!!')
-    file.write(bodyClose)
-    file.close()
+    try:
+        file = open(file, 'rw')
+        file.write(header)
+        file.write(title)
+        file.write(bodyOpen)
+        file.write('Testing!!!')
+        file.write(bodyClose)
+        file.close()
+    except IOError:
+        print 'Error Creating HTML File. Aborting...'
 
 # Main function for the program
 def main():
 
     # declare variables
-    url = 'https://news.google.com/?tab=wn&hl=en-US&gl=US&ceid=US:en'
+    url = 'https://news.google.com/'
 
     # open webpage
     try:
@@ -56,3 +62,6 @@ def main():
 
     # make new page
     makePage(html)
+
+if __name__ == '__main__':
+    main()
