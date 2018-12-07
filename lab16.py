@@ -1,6 +1,6 @@
 # Lab16 - Team 10
 # M. Mariscal, C. Piwarski, W. Robleh
-# Developed with Python3
+# Developed with Python3.7.1
 
 ################################################################################
 # 1. Choose a website that you frequent that has data (text) that could be 
@@ -26,7 +26,7 @@ def makePage(events):
     file = os.path.join(os.getcwd(), filename)
     header = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transition//EN"\
  "http://www.w3.org/TR/html4/loose.dtd">'
-    title = '<html>\n<head><title> Title </title>\n</head>'
+    title = '<html>\n<head><title> Python Events </title>\n</head>'
     bodyOpen = '<body>\n<h1>'
     bodyClose = '</body>\n</html>'
     try:
